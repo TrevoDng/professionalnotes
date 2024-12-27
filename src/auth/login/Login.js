@@ -19,30 +19,22 @@ useEffect(()=> {
  const storage = window.localStorage;
 const cachedData = storage.getItem('todoappUserData');
  setUserData(cachedData);	
-}, []);
+}, [userData]);
 
 
    const navigate = useNavigate();
 
 //  const {dispatch} = useContext(AuthContext);
 
-	    const [data, setData] = useState([]);
-//const [dataList, setDataList] = useState([]);
-//const [nextId, setNextId] = useState(1);
-
-    const handleChange=(e)=> {
-        e.preventDefault()
-        setData(e.target.value)
-    }
     const handleSubmit=(e)=> {
-	e.preventDefault();
-        if(email === "trevor279@live.com" && password === "password") {
-	alert(email)
-	navigate("/dashboard");
-	} else {
-	alert(userData.email)
-	alert(password)
-   alert(`wrong username or password,
+	    e.preventDefault();
+      if(email === "trevor279@live.com" && password === "12345") {
+	      alert(email)
+	      navigate("/dashboard");
+	    } else {
+	        alert(userData.email)
+	        alert(password)
+          alert(`wrong username or password,
 please press register button if not registered`);
 	}
     }

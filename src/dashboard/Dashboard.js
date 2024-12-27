@@ -1,19 +1,28 @@
 import React, {useEffect, useState} from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard =()=> {
 
- const [data, setData] = useState([]);
-     const storage = window.localStorage;
+  const [data, setData] = useState([]);
+  const storage = window.localStorage;
     
+  const navigate = useNavigate();
+
     useEffect(()=> {
-     const cachedData = storage.getItem("todoappUserData");
-     const myData = JSON.parse(cachedData);
-      setData(cachedData);
- alert(myData.username);
+      const cachedData = storage.getItem("todoappUserData");
+      //if (data.length > 0) {
+        const myData = JSON.parse(cachedData);
+        setData(cachedData);
+        alert(myData.username);
+    // }
    }, []);
 
    const logOut=()=> {
      storage.setItem("todoappUserData", null);
+
+     if (data.length  < 1 ) {
+      navigate('/login');
+     }
    }
 
 
@@ -23,15 +32,7 @@ const Dashboard =()=> {
          <button
             onClick={logOut}
             >Logout</button>
-  <ul>
-  {/*
-    data.map((item, index)=> (
-    <li key={index}> {item.username}  </li>
-))
-*/
-  }
-
-  </ul>
+  <p>{data}</p>
 	</div>
 	)
 }

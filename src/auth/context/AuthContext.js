@@ -1,9 +1,12 @@
 import React, {createContext, useContext, useEffect, useReducer} from "react";
 import AuthReducer from "./AuthReducer";
  
-export const INTIAL_STATE =    {
-    currentUser: JSON.parse(localStorage.getItem("todoappUserData")) || null,
-};
+export const INTIAL_STATE = {
+    currentUser: (() => {
+      const userData = JSON.parse(localStorage.getItem("todoappUserData"));
+      return userData && userData.username && userData.email ? userData : null;
+    })(),
+  };
 
 export const AuthContext = createContext(INTIAL_STATE);
 

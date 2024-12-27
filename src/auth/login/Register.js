@@ -15,49 +15,33 @@ function RegisterUser() {
     const [account, setAccount] = useState();
 
 const storage = window.localStorage; 
-//const cachedData = storage.getItem('todoappUserData');
 
     const navigate = useNavigate();
 
-    const handleUserName = (e) => {
-        setUsername(e.target.value);
-        //send id data to FirebaseError.js
-        
-        //setAccount(getAccount);
-      
-    }
-
-    const handleContact = (e) => {
-        setContact(e.target.value);
-    }
-
-   const handleSubmit = (e) => {
-  	e.preventDefault();
-
-    if (username !== '' && email !== '' && password !== '') {
-       const userData = {
-         username,
-         email,
-         password,
-       };
-
-    try {
-      storage.setItem("todoappUserData", JSON.stringify(userData));
-
-	setTimeout(()=> {
-          navigate("/");
-	}, 1000)
-     } catch (err) {
-      alert("Something went wrong, please try again");
-      console.log("Failed to save user data");
-    }
-    setUsername("");
-    setPassword("");
-    setEmail("");
-  } else {
-    alert("Please fill in all fields");
-    }
-   };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+    
+      if (username !== "" && email !== "" && password !== "") {
+        const userData = {
+          username,
+          email,
+          password, // Optional: Hash passwords for better security.
+        };
+    
+        try {
+          localStorage.setItem("todoappUserData", JSON.stringify(userData));
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } catch (err) {
+          alert("Something went wrong, please try again");
+          console.log("Failed to save user data");
+        }
+      } else {
+        alert("Please fill in all fields");
+      }
+    };
+    
 
 
    return(
@@ -71,7 +55,7 @@ const storage = window.localStorage;
         <input
           type="text"
           placeholder="Full Name"
-          onChange={handleUserName}
+          onChange={(e) => setUsername(e.target.value)}
           className="login-input"
 	  required
         />
@@ -92,14 +76,7 @@ const storage = window.localStorage;
   required 
 />
     <input type='submit' value='Register' className='login-button' />
-{/*
-        <label htmlFor="file"></label>
-        <input className="send-file" 
-            type="file"
-            id="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            style={{ display: "display" }} />
-*/}
+
 <p>Already have an account</p>
 <ul>
 <li>Cilck <Link to="/login" >here</Link> to Login</li>

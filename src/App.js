@@ -1,15 +1,81 @@
-//import React, { Profiler, useEffect, useState } from 'react';
-//import './App.css';
+
 import { BrowserRouter, 
 Routes, 
 Route, 
 Navigate, 
 useNavigate } from 'react-router-dom';
 
-//import HomeContent from './pages/HomeContent';
-//import Login from './pages/login/Login';
 import { useContext, useEffect, 
 useState} from "react";
+
+import { AuthContext, AuthProvider, INTIAL_STATE } from './auth/context/AuthContext';
+import './App.css';
+import Login from './auth/login/Login';
+import RegisterUser from "./auth/login/Register";
+import Dashboard from './dashboard/Dashboard';
+import { useInactivityTimeout } from './auth/activity/inactivity';
+
+function App() {
+
+  const [user, setUser] = useState(null);
+  const {currentUser} = useContext(AuthContext);                          
+   // const currentUser = false;
+
+   const isInactive = useInactivityTimeout(1 * 60 * 1000); // 15 minutes inactivity timeout
+
+   //const navigate = useNavigate();
+
+   console.log("outside if statement", user);
+
+   useEffect(()=> {
+    if(currentUser) {
+      setUser(currentUser);
+      console.log("inside if statement", currentUser);
+     }
+
+     if (isInactive) {
+      alert("User is inactive. Logging out...");
+      console.log("User is inactive. Logging out...");
+      localStorage.removeItem("todoappUserData"); // Clear user data from localStorage
+      //navigate("/login"); // Redirect to login
+    }
+    
+     
+    }, [currentUser, isInactive]);
+
+   const RequireAuth = ({ children }) => {
+    return currentUser && currentUser.username && currentUser.email ? (
+      children
+    ) : (
+      <Navigate to="/login" />
+    );
+  };
+  
+
+  
+
+  return (
+	<div className="App">
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={user ? <Dashboard /> : <Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registeruser" element={<RegisterUser />} />
+        <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+      </Routes>
+    </BrowserRouter>
+</div>
+	  );
+}
+
+export default App;
+
+
+//import logo from './logo.svg';
+//import React, { Profiler, useEffect, useState } from 'react';
+//import './App.css';
+//import HomeContent from './pages/HomeContent';
+//import Login from './pages/login/Login';
 //import { AuthContext } from './auth/context/AuthContext';
 /*
 import UserAcount from './UserAccounts/UserAccount';
@@ -34,44 +100,3 @@ import SendProofOfPayment from './pages/service/proofofpayment/SendProofOfPaymen
 
 const NavbarHolder =() => <Navbar />;
 */
-import { AuthContext, AuthProvider, INTIAL_STATE } from './auth/context/AuthContext';
-
-import logo from './logo.svg';
-import './App.css';
-import Login from './auth/login/Login';
-import RegisterUser from "./auth/login/Register";
-import Dashboard from './dashboard/Dashboard';
-
-function App() {
-
-  const [user, setUser] = useState([]);
-  const {currentUser} = useContext(AuthContext);                          
-   // const currentUser = false;
-
-
-  const RequireAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/login" />; 
-    }
-
-   useEffect(()=> {
-    if(currentUser) {
-      setUser(currentUser);
-     }
-     
-    }, []);
-
-  return (
-	<div className="App">
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={user ? <Dashboard /> : <Login />} />
-      <Route path="/login" index element={<Login />} />
-      <Route path="/registeruser" index element={<RegisterUser />} />
-      <Route path="/dashboard" index element={<RequireAuth><Dashboard /></RequireAuth>} />
-    </Routes>
-  </BrowserRouter>
-</div>
-	  );
-}
-
-export default App;
