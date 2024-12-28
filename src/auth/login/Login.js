@@ -15,14 +15,21 @@ const Login=()=> {
  const [userData, setUserData] = useState("");
     const [logText, setLogText] = useState(0);
 
-useEffect(()=> {
- const storage = window.localStorage;
-const cachedData = storage.getItem('todoappUserData');
- setUserData(cachedData);	
-}, [userData]);
+  const navigate = useNavigate();
 
+  useEffect(()=> {
+    const storage = window.localStorage;
+    const cachedData = storage.getItem('todoappUserData');
+    setUserData(cachedData);	
 
-   const navigate = useNavigate();
+    if(cachedData) {
+ const parsedData = JSON.parse(cachedData);
+// alert(JSON.stringify(parsedData));
+    //  if(parsedData.email) {
+        navigate("/dashboard");
+     // }
+     }
+  }, [navigate]);
 
 //  const {dispatch} = useContext(AuthContext);
 
