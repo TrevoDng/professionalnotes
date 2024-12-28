@@ -1,4 +1,3 @@
-
 import { BrowserRouter, 
 Routes, 
 Route, 
@@ -25,7 +24,7 @@ function App() {
 
    //const navigate = useNavigate();
 
-   console.log("outside if statement", user);
+   alert("outside if statement", user);
 
    useEffect(()=> {
     if(currentUser) {
@@ -41,7 +40,7 @@ function App() {
     }
     
      
-    }, [currentUser, isInactive]);
+    }, [currentUser]);
 
    const RequireAuth = ({ children }) => {
     return currentUser && currentUser.username && currentUser.email ? (
@@ -58,7 +57,7 @@ function App() {
 	<div className="App">
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={user ? <Dashboard /> : <Login />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registeruser" element={<RegisterUser />} />
         <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />

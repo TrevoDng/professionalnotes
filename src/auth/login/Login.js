@@ -12,30 +12,38 @@ const Login=()=> {
  const [error, setError] = useState(false);
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
- const [userData, setUserData] = useState("");
+ const [userData, setUserData] = useState(()=> 
+{
+  const catchedData = localStorage.getItem("todoappUserData");
+    return catchedData ? JSON.parse(catchedData) : [];
+  
+});
     const [logText, setLogText] = useState(0);
 
   const navigate = useNavigate();
 
   useEffect(()=> {
+/*
     const storage = window.localStorage;
     const cachedData = storage.getItem('todoappUserData');
     setUserData(cachedData);	
+*/
+alert(JSON.stringify(userData));
 
-    if(cachedData) {
- const parsedData = JSON.parse(cachedData);
+    if(userData.length > 0) {
+ //const parsedData = JSON.parse(cachedData);
 // alert(JSON.stringify(parsedData));
-    //  if(parsedData.email) {
+      if(userData.email) {
         navigate("/dashboard");
-     // }
+       }
      }
   }, [navigate]);
 
-//  const {dispatch} = useContext(AuthContext);
+//const {dispatch} = useContext(AuthContext);
 
     const handleSubmit=(e)=> {
 	    e.preventDefault();
-      if(email === "trevor279@live.com" && password === "12345") {
+      if(email === userData?.email && password === userData?.password) {
 	      alert(email)
 	      navigate("/dashboard");
 	    } else {
