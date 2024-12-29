@@ -101,7 +101,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = { username, email, password };
     
