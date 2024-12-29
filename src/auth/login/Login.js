@@ -1,3 +1,77 @@
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+
+import "./Login.css";
+
+const Login = () => {
+  const [error, setError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [storedUserData, setStoredUserData] = useState(() => {
+    const catchedData = localStorage.getItem("todoappUserData");
+    return catchedData ? JSON.parse(catchedData) : null;
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+   // alert(JSON.stringify(storedUserData));
+    if (storedUserData && storedUserData.email) {
+      navigate("/dashboard");
+    }
+  }, [storedUserData, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (storedUserData?.email === email && storedUserData?.password === password) {
+      alert("Login successful");
+      navigate("/dashboard");
+    } else {
+      setError(true);
+      alert("Wrong username or password. Please register if not already registered.");
+    }
+  };
+
+  return (
+    <div>
+      <div className='login-container'>
+        <div className='login'> 
+          <form className='login-form' onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              className="login-input"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              className="login-input"
+            />
+            <input type='submit' value='Login' className='login-button' />
+            {error && <span style={{ color: "red" }}>Wrong email or password!</span>}
+            <ul>
+              <li>
+                Click <Link to="/registeruser">here</Link> to register
+              </li>
+            </ul>
+          </form>
+        </div>
+        <div className="login-info">
+          <h5 style={{ fontWeight: "600" }}>TEN GLOBAL MONEY</h5>
+          <p style={{ marginTop: '50px' }}>Safe Cash Send</p>
+          <p>Quick Process</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+
+
+/*
 import React, {useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -23,11 +97,11 @@ const Login=()=> {
   const navigate = useNavigate();
 
   useEffect(()=> {
-/*
-    const storage = window.localStorage;
-    const cachedData = storage.getItem('todoappUserData');
-    setUserData(cachedData);	
-*/
+
+    //const storage = window.localStorage;
+    //const cachedData = storage.getItem('todoappUserData');
+   // setUserData(cachedData);	
+
 alert(JSON.stringify(userData));
 
     if(userData.length > 0) {
@@ -90,3 +164,4 @@ please press register button if not registered`);
 }
 
 export default Login;
+*/

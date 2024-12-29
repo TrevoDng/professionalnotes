@@ -24,7 +24,7 @@ function App() {
 
    //const navigate = useNavigate();
 
-   alert("outside if statement", user);
+  // alert("outside if statement", user);
 
    useEffect(()=> {
     if(currentUser) {
@@ -33,7 +33,7 @@ function App() {
      }
 
      if (isInactive) {
-      alert("User is inactive. Logging out...");
+     // alert("User is inactive. Logging out...");
       console.log("User is inactive. Logging out...");
       localStorage.removeItem("todoappUserData"); // Clear user data from localStorage
       //navigate("/login"); // Redirect to login
