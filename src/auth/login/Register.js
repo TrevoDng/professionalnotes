@@ -1,3 +1,4 @@
+/*
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -88,9 +89,9 @@ function RegisterUser() {
 }
 
 export default RegisterUser;
+*/
 
 
-/*
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -114,17 +115,24 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={handleRegister}>
+	<h1 className="register-heading">
+          <span>Register</span>
+        </h1>
+        <div className="login-container">
+          <div className="login">
+          <form className="login-form" onSubmit={handleSubmit}>
       <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
       <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
       <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
       <button type="submit">Register</button>
     </form>
+</div>
+</div>
   );
 };
 
 export default Register;
-*/
+
 
 /*
 import { useEffect, useState } from "react";
