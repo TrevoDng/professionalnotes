@@ -111,7 +111,7 @@ const Register = () => {
     // Ensure persistence and navigate
     setTimeout(() => {
       navigate('/login'); // Navigate to login after successful registration
-    }, 100); // Add a small delay to ensure `localStorage` is updated
+    }, 500); // Add a small delay to ensure `localStorage` is updated
   };
 
   return (
@@ -122,9 +122,21 @@ const Register = () => {
       <div className="login-container">
         <div className="login">
           <form className="login-form" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-            <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="text" 
+              placeholder="Username" 
+              onChange={(e) => setUsername(e.target.value)} 
+              className="login-input"
+	            required/>
+            <input type="email" 
+            placeholder="Email" 
+            onChange={(e) => setEmail(e.target.value)} 
+            className="login-input"
+	          required/>
+            <input type="password" 
+            placeholder="Password" 
+            onChange={(e) => setPassword(e.target.value)} 
+            className="login-input"
+	          required/>
             <button type="submit">Register</button>
           </form>
         </div>

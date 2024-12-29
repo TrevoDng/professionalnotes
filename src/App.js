@@ -33,14 +33,15 @@ function App() {
      }
 
      if (isInactive) {
-     // alert("User is inactive. Logging out...");
+      alert("User is inactive. Logging out...");
       console.log("User is inactive. Logging out...");
       localStorage.removeItem("todoappUserData"); // Clear user data from localStorage
       //navigate("/login"); // Redirect to login
+      <Navigate to="/login" />
     }
     
      
-    }, [currentUser]);
+    }, [currentUser, isInactive]);
 
    const RequireAuth = ({ children }) => {
     return currentUser && currentUser.username && currentUser.email ? (
