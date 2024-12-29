@@ -2,27 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [data, setData] = useState(null); // Initialize with null for better checks
+  const [data, setData] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const cachedData = localStorage.getItem("todoappUserData");
+    //const storedUserData = JSON.parse(localStorage.getItem("todoappUserData") || "{}");
+
     if (cachedData) {
-      const parsedData = JSON.parse(cachedData); // Parse data correctly
-      setData(parsedData); // Set parsed data
+      const parsedData = JSON.parse(cachedData); 
+      setData(parsedData); 
     } else {
-      navigate("/login"); // Redirect to login if no data is found
+      navigate("/login"); 
     }
   }, [navigate]);
 
   const logOut = () => {
-    localStorage.removeItem("todoappUserData"); // Clear user data
-    setData(null); // Clear local state
-    navigate("/login"); // Redirect to login
+    localStorage.removeItem("todoappUserData"); 
+    setData(null); 
+    navigate("/login");
   };
 
   if (!data) {
-    return <div>Loading...</div>; // Show a loading state if data is not available
+    return <div>Loading...</div>;
   }
 
   return (

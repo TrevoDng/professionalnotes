@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import "./Login.css";
 
@@ -18,6 +18,7 @@ const Login = () => {
    // alert(JSON.stringify(storedUserData));
     if (storedUserData && storedUserData.email) {
       navigate("/dashboard");
+      //<Navigate to="/login" />
     }
   }, [storedUserData, navigate]);
 
@@ -26,6 +27,7 @@ const Login = () => {
     if (storedUserData?.email === email && storedUserData?.password === password) {
       alert("Login successful");
       navigate("/dashboard");
+      //<Navigate to="/dashboard" />
     } else {
       setError(true);
       alert("Wrong username or password. Please register if not already registered.");

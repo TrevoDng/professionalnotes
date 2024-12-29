@@ -20,7 +20,7 @@ function App() {
   const {currentUser} = useContext(AuthContext);                          
    // const currentUser = false;
 
-   const isInactive = useInactivityTimeout(1 * 60 * 1000); // 15 minutes inactivity timeout
+   const isInactive = useInactivityTimeout(15 * 60 * 1000); // 15 minutes inactivity timeout
 
    //const navigate = useNavigate();
 
